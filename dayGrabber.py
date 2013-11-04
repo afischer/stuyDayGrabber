@@ -4,12 +4,13 @@
                 #####  stuyDayGrabber by Andrew Fischer  #####
                 #####                                   #####
                 ##############################################
-                #####      (c) Andrew Fischer, 2013      #####
-                ##### Under the MIT Licence-see licencse #####
+                ####       (c) Andrew Fischer, 2013       ####
+                ####         Under the MIT Licence        ####
+                ####     http://andrew.mit-license.org    ####
                 ##############################################
-                ##### A quick and dirty python script to #####
-                ##### grab the lab and bell schedule from#####
-                ##### stuyvesant's awful website. Enjoy! #####
+                ####  A quick and dirty python script to  ####
+                ####  grab the lab and bell schedule from ####
+                ####  stuyvesant's awful website. Enjoy!  ####
                 ##############################################
 
 
@@ -22,12 +23,29 @@ import string
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Data Grabbing
-thisWeeksURL = 'http://stuy.enschool.org/apps/events/show_event.jsp?REC_ID=927665&id=1'
+
+stuyedu = 'http://stuy.enschool.org/'
+stuy_data = urllib.urlopen(stuyedu)
+stuy_data = stuy_data.readlines()
+stuy_data = " ".join(stuy_data)
+#print stuy_data
+
+
+## Now we need to get this week's WEEKLY SCHEDULE URL from that data.
+def getWeeklyURL():
+    end = stuy_data.rfind('WEEKLY SCHEDULE')
+    #The links are laid out in the most idiotic table I have ever seen.
+    #This is NOT going to be easy or pretty.
+    beg = end - 100
+    searchArea = stuy_data[beg:end]
+    link = searchArea.split('\t')
+    link = 'http://stuy.enschool.org' + link[-1][9:][:-2]
+    return link
+
+
+thisWeeksURL = getWeeklyURL()
 downloaded_data  = urllib.urlopen(thisWeeksURL)
-#### This should break after one week. I need to make a function to get the 
-
 web_data = downloaded_data.readlines()
-
 web_data = " ".join(web_data) #Turns web_data list into readable html
 #print web_data
 
@@ -58,16 +76,17 @@ weekday = getWeekday() #Sets weekday to current day of the week
 
 
 
-def getDay():
-    if weekday == "SATURDAY" or "SUNDAY":
-        print "It's the weekend!"
-
-    else:
+## This is the main function that gets the current bell schedule and lab/PE rotation
+def getSchedules():
+#    if weekday == "SATURDAY" or "SUNDAY":
+#        print "It's the weekend!"
+#
+#    else:
         
 ### NOTE:  IF TESTING ON A WEEKEND, COMMENT OUT ABOVE AND CHANGE weekday BELOW
 ###        TO A DAY OF THE WEEK!! OTHERWISE THIS WILL NOT TEST PROPERLY!!!!
 
-        beg = web_data.rfind(weekday)
+        beg = web_data.rfind('THURSDAY')
         #print beg
         end = beg + 65
         #print end
@@ -106,9 +125,6 @@ def cleanList(L):
     return cleanedList
 
 
-
-
-
 ### bellCheck checks to make sure the result is an actual schedule, and not a day off notice
 def bellCheck(bell):
     if bell == 'Regular' or bell == 'Special' or bell == 'Conference' or bell == "Homeroom":
@@ -126,5 +142,7 @@ def labCheck(lab):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Function Calls:
-getDay()
+
+#print getWeeklyURL()
+getSchedules()
                         

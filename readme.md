@@ -18,6 +18,6 @@ In short, you are free to use/distribute this program for both personal and comm
 
 
 ### ToDo:
-- Robustify to make work any weekday
-  - Need to create function to get link to weekly schedule every week
+- ~~Robustify to make work any weekday~~
+  - ~~Need to create function to get link to weekly schedule every week~~ **Done** with commit 
 - Find somewhere to implement this...

@@ -3,6 +3,7 @@
 ### What is this?
 
 stuyDayGrabber is a quick and dirty program to grab the Bell schedule and lab rotation at Stuy. It pulls data from the stuy website and parses it into a readable and easy to use format.
+This was initially built for the new *Spectator* website, but I'm not sure if/how/when I will implement it.
 
 ### Requirements:
 

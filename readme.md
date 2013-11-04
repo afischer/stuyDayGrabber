@@ -19,5 +19,5 @@ In short, you are free to use/distribute this program for both personal and comm
 
 ### ToDo:
 - ~~Robustify to make work any weekday~~
-  - ~~Need to create function to get link to weekly schedule every week~~ **Done** with commit 
+  - ~~Need to create function to get link to weekly schedule every week~~ **Done** with commit a315aaf.
 - Find somewhere to implement this...

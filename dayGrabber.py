@@ -1,23 +1,40 @@
 
-##############################################
-###### stuyDayGrabber by Andrew Fischer ######
-##############################################
-######     (c)Andrew Fischer, 2013      ######
+                ##############################################
+                #####                                   #####
+                #####  stuyDayGrabber by Andrew Fischer  #####
+                #####                                   #####
+                ##############################################
+                #####      (c) Andrew Fischer, 2013      #####
+                ##### Under the MIT Licence-see licencse #####
+                ##############################################
+                ##### A quick and dirty python script to #####
+                ##### grab the lab and bell schedule from#####
+                ##### stuyvesant's awful website. Enjoy! #####
+                ##############################################
 
-import urllib
-import csv
-import time, datetime
+
+# Module Imports
+import urllib               #to get website data
+import csv                  #to parse and edit website data
+import time, datetime       #to get current days of week
 import string
 
-downloaded_data  = urllib.urlopen('http://stuy.enschool.org/apps/events/show_event.jsp?REC_ID=927665&id=1')
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Data Grabbing
+thisWeeksURL = 'http://stuy.enschool.org/apps/events/show_event.jsp?REC_ID=927665&id=1'
+downloaded_data  = urllib.urlopen(thisWeeksURL)
+#### This should break after one week. I need to make a function to get the 
+
 web_data = downloaded_data.readlines()
 
 web_data = " ".join(web_data) #Turns web_data list into readable html
-
 #print web_data
 
-### getWeekday grabs the int given by datetime and converts it to
-### the day of the week as used on stuy's website
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#Function Creation
+### getWeekday grabs the int given by datetime and converts it to the day of the week as used on stuy's website
 def getWeekday():
     dayInt = datetime.datetime.today().weekday()
     if dayInt == 0:
@@ -36,38 +53,46 @@ def getWeekday():
         return 'SUNDAY'
 
 
-weekday = getWeekday()
+
+weekday = getWeekday() #Sets weekday to current day of the week
+
 
 
 def getDay():
+    if weekday == "SATURDAY" or "SUNDAY":
+        print "It's the weekend!"
 
-#    if weekday == "SATURDAY" or "SUNDAY":
- #       return "It's the weekend!"
-#    else:
+    else:
+        
 ### NOTE:  IF TESTING ON A WEEKEND, COMMENT OUT ABOVE AND CHANGE weekday BELOW
 ###        TO A DAY OF THE WEEK!! OTHERWISE THIS WILL NOT TEST PROPERLY!!!!
-        beg = web_data.rfind('WEDNESDAY')
+
+        beg = web_data.rfind(weekday)
         #print beg
         end = beg + 65
         #print end
         searchArea = web_data[beg:end]
         dailyInfo = searchArea.split('<br>')
         dailyInfo = cleanList(dailyInfo) #removes things like \r, null, '' from list
-        print dailyInfo
+        #print dailyInfo
 
 
         bell = str(dailyInfo[1])
         bellBeg = bell.find(':')
         bell = bell[bellBeg + 2:] #removes "Bell:" to get raw bell schedule name
-        print bell
+        #print bell
 
 
         lab = str(dailyInfo[2])
         labBeg = lab.find(':')
         lab = lab[labBeg + 2:] #removes "'PhysEd/Sci:" to get raw rotation
-        print lab
+        #print lab
 
-        
+        if bellCheck(bell) == True and labCheck(lab) == True:
+            print bell
+            print lab
+        else:
+            print "ERROR"
 
 ### cleanList removes weird html formatting left over from find
 def cleanList(L):
@@ -84,6 +109,22 @@ def cleanList(L):
 
 
 
+### bellCheck checks to make sure the result is an actual schedule, and not a day off notice
+def bellCheck(bell):
+    if bell == 'Regular' or bell == 'Special' or bell == 'Conference' or bell == "Homeroom":
+        return True
+    else:
+        return False
 
+### labCheck makes sure the given rotation is valid.
+def labCheck(lab):
+    if lab == 'A' or lab == 'B' or lab == 'A1' or lab == 'B1' or lab == 'A2' or lab == 'B2':
+        return True
+    else:
+        return False
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Function Calls:
 getDay()
                         

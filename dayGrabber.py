@@ -78,10 +78,10 @@ weekday = getWeekday() #Sets weekday to current day of the week
 
 ## This is the main function that gets the current bell schedule and lab/PE rotation
 def getSchedules():
-#    if weekday == "SATURDAY" or "SUNDAY":
-#        print "It's the weekend!"
-#
-#    else:
+    if weekday == "SATURDAY" or "SUNDAY":
+        print "It's the weekend!"
+
+    else:
         
 ### NOTE:  IF TESTING ON A WEEKEND, COMMENT OUT ABOVE AND CHANGE weekday BELOW
 ###        TO A DAY OF THE WEEK!! OTHERWISE THIS WILL NOT TEST PROPERLY!!!!

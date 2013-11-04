@@ -86,7 +86,7 @@ def getSchedules():
 ### NOTE:  IF TESTING ON A WEEKEND, COMMENT OUT ABOVE AND CHANGE weekday BELOW
 ###        TO A DAY OF THE WEEK!! OTHERWISE THIS WILL NOT TEST PROPERLY!!!!
 
-        beg = web_data.rfind('THURSDAY')
+        beg = web_data.rfind(weekday)
         #print beg
         end = beg + 65
         #print end
@@ -143,6 +143,9 @@ def labCheck(lab):
 
 # Function Calls:
 
+## start_time = time.time()  [uncomment if you want to time]
+
 #print getWeeklyURL()
 getSchedules()
                         
+## print time.time() - start_time, "seconds" [uncomment if you want to time]

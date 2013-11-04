@@ -11,6 +11,7 @@ stuyDayGrabber is built with Python 2.7.3, but should work with any 2.7.x or abo
 
 
 ### License & Usage:
+![MIT License](http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/License_icon-mit.svg/200px-License_icon-mit.svg.png "MIT License")
 stuyDayGrabber is an open source program under the MIT License. Please see the License file for details on copyright and usage.
 In short, you are free to use/distribute this program for both personal and commercial use (who would use this commercially...?) as long as you attribute me (Andrew Ficher) and include the license file in this repo along with the file.
 

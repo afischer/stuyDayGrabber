@@ -46,26 +46,43 @@ def getDay():
 #    else:
 ### NOTE:  IF TESTING ON A WEEKEND, COMMENT OUT ABOVE AND CHANGE weekday BELOW
 ###        TO A DAY OF THE WEEK!! OTHERWISE THIS WILL NOT TEST PROPERLY!!!!
-        beg = web_data.rfind('MONDAY')
+        beg = web_data.rfind('WEDNESDAY')
         #print beg
         end = beg + 65
         #print end
         searchArea = web_data[beg:end]
         dailyInfo = searchArea.split('<br>')
         dailyInfo = cleanList(dailyInfo) #removes things like \r, null, '' from list
-        #print dailyInfo
-        
+        print dailyInfo
+
+
+        bell = str(dailyInfo[1])
+        bellBeg = bell.find(':')
+        bell = bell[bellBeg + 2:] #removes "Bell:" to get raw bell schedule name
+        print bell
+
+
+        lab = str(dailyInfo[2])
+        labBeg = lab.find(':')
+        lab = lab[labBeg + 2:] #removes "'PhysEd/Sci:" to get raw rotation
+        print lab
+
         
 
 ### cleanList removes weird html formatting left over from find
 def cleanList(L):
-    Clean = []
+    cleanedList = []
 
     for x in L: 
-        x = [x[:x.find('\r')]] #remove '\r' from string items
-        Clean = Clean + x
-    Clean = filter('', Clean) #remove '' from string items
-    return Clean
+        x = [x[:x.find('\r')]] #removes '\r' from string items
+        cleanedList = cleanedList + x
+    while '' in cleanedList: #removes '' from string items
+        cleanedList.remove('')
+    return cleanedList
+
+
+
+
 
 
 getDay()

@@ -73,13 +73,13 @@ def getWeekday():
 
 
 weekday = getWeekday() #Sets weekday to current day of the week
-
+#print weekday
 
 
 ## This is the main function that gets the current bell schedule and lab/PE rotation
 def getSchedules():
-    if weekday == "SATURDAY" or "SUNDAY":
-        print "It's the weekend!"
+    if weekday == "SATURDAY" or weekday == "SUNDAY":
+        print "WEEKEND"
 
     else:
         
@@ -111,7 +111,7 @@ def getSchedules():
             print bell
             print lab
         else:
-            print "ERROR"
+            print "NO SCHOOL"
 
 ### cleanList removes weird html formatting left over from find
 def cleanList(L):
@@ -127,7 +127,7 @@ def cleanList(L):
 
 ### bellCheck checks to make sure the result is an actual schedule, and not a day off notice
 def bellCheck(bell):
-    if bell == 'Regular' or bell == 'Special' or bell == 'Conference' or bell == "Homeroom":
+    if bell == 'Regular' or bell == 'Special' or bell == 'Conference' or bell == "Homeroom "or bell == 'Special Schedule':
         return True
     else:
         return False

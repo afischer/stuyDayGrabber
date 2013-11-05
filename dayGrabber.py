@@ -1,3 +1,6 @@
+#!/usr/bin/python
+print 'Content-Type: text/html'
+print
 
                 ##############################################
                 #####                                   #####
@@ -12,6 +15,14 @@
                 ####  grab the lab and bell schedule from ####
                 ####  stuyvesant's awful website. Enjoy!  ####
                 ##############################################
+
+###HTML FRIENDLY BRANCH FOR STUY.EDU IMPLEMENTATION
+
+
+
+#To get info from the user to put on a webpage, you need a
+# CGI Form (common gateway interface)
+
 
 
 # Module Imports
@@ -146,6 +157,24 @@ def labCheck(lab):
 ## start_time = time.time()  [uncomment if you want to time]
 
 #print getWeeklyURL()
-getSchedules()
+schedule = getSchedules()
                         
 ## print time.time() - start_time, "seconds" [uncomment if you want to time]
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+###html crap
+page = ''
+page += '''
+<html>
+    <title> stuyDayGrabber by Andrew Fischer </title>
+    <body> 
+'''
+page += schedule
+page += '''
+    </body>
+</html>
+'''
+
+print page

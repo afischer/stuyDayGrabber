@@ -1,4 +1,4 @@
-# stuyDayGrabber
+# stuyDayGrabber [![GAnalytics, DONT REMOVE](https://ga-beacon.appspot.com/UA-6208376-3/stuyDayGrabber/)](https://github.com/igrigorik/ga-beacon)
 
 ### What is this?
 
@@ -16,9 +16,3 @@ stuyDayGrabber is an open source program under the MIT License. Please see the L
 In short, you are free to use/distribute this program for both personal and commercial use (who would use this commercially...?) as long as you attribute me (Andrew Ficher) and include the license file in this repo along with the file.
 
 
-
-
-### ToDo:
-- ~~Robustify to make work any weekday~~
-  - ~~Need to create function to get link to weekly schedule every week~~ **Done** with commit a315aaf.
-- Find somewhere to implement this...
